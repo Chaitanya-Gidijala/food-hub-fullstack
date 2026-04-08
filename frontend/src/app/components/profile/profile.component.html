@@ -1,0 +1,62 @@
+<!-- Premium Profile Page -->
+<div class="profile-container" *ngIf="user">
+  <div class="profile-wrapper">
+    <div class="profile-header">
+      <div class="profile-avatar">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+      <h1 class="profile-name">{{user.username}}</h1>
+      <p class="profile-role">{{user.role === 'CUSTOMER' ? 'Food Lover' : user.role === 'RESTAURANT_OWNER' ? 'Restaurant Owner' : 'Administrator'}}</p>
+    </div>
+
+    <div class="profile-body">
+      <div class="section-title">
+        <mat-icon>info</mat-icon>
+        <span>Personal Information</span>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-icon">
+            <mat-icon>person</mat-icon>
+          </div>
+          <div class="info-content">
+            <div class="info-label">Username</div>
+            <div class="info-value">{{user.username}}</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <mat-icon>email</mat-icon>
+          </div>
+          <div class="info-content">
+            <div class="info-label">Email Address</div>
+            <div class="info-value">{{user.email}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <div class="action-buttons">
+        <button class="action-btn primary" routerLink="/home">
+          <mat-icon>home</mat-icon>
+          <span>Back to Home</span>
+        </button>
+        <button class="action-btn primary" routerLink="/orders" *ngIf="user.role === 'CUSTOMER'">
+          <mat-icon>receipt_long</mat-icon>
+          <span>My Orders</span>
+        </button>
+        <button class="action-btn" routerLink="/address-list" *ngIf="user.role === 'CUSTOMER'">
+          <mat-icon>location_on</mat-icon>
+          <span>Manage Addresses</span>
+        </button>
+        <button class="action-btn" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

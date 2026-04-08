@@ -1,0 +1,38 @@
+<div class="dashboard-container">
+  <h1>
+    <mat-icon>dashboard</mat-icon>
+    Customer Dashboard
+  </h1>
+  
+  <div class="dashboard-cards">
+    <mat-card class="dashboard-card" (click)="navigateToRestaurants()">
+      <mat-card-header>
+        <mat-icon class="card-icon">restaurant_menu</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>Browse Restaurants</h2>
+        <p>Explore restaurants and order food</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="dashboard-card" (click)="navigateToCart()">
+      <mat-card-header>
+        <mat-icon class="card-icon">shopping_cart</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>My Cart</h2>
+        <p>View and manage your cart</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="dashboard-card" (click)="navigateToOrders()">
+      <mat-card-header>
+        <mat-icon class="card-icon">receipt_long</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>My Orders</h2>
+        <p>Track your orders</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

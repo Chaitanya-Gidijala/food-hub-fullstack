@@ -1,0 +1,329 @@
+/* Premium Address Selection */
+.address-container {
+  min-height: 100vh;
+  background: var(--gray-50);
+  padding-bottom: 100px;
+}
+
+.address-header {
+  background: white;
+  padding: 24px 40px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 72px;
+  z-index: 100;
+}
+
+.back-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--gray-300);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  border-color: var(--primary);
+  background: var(--gray-50);
+}
+
+.header-content h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gray-900);
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 4px;
+}
+
+.header-content p {
+  font-size: 14px;
+  color: var(--gray-600);
+}
+
+.address-content {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 40px;
+}
+
+.addresses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.address-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.address-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.address-card.selected {
+  border-color: var(--primary);
+  box-shadow: 0 8px 24px rgba(255, 107, 53, 0.2);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.address-type {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--gray-50);
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--gray-900);
+  text-transform: capitalize;
+  flex: 1;
+}
+
+.address-type mat-icon {
+  color: var(--primary);
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.default-badge {
+  padding: 4px 12px;
+  background: var(--success);
+  color: white;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.edit-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-btn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.edit-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.address-body {
+  padding-left: 8px;
+}
+
+.contact-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 8px;
+}
+
+.address-text {
+  font-size: 14px;
+  color: var(--gray-700);
+  line-height: 1.6;
+  margin: 4px 0;
+}
+
+.phone-number {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--gray-700);
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.phone-number mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--primary);
+}
+
+.select-indicator {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.select-indicator mat-icon {
+  color: var(--primary);
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.add-address-card {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 140, 97, 0.1) 100%);
+  border: 2px dashed var(--primary);
+  border-radius: 16px;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  min-height: 200px;
+}
+
+.add-address-card:hover {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(255, 140, 97, 0.15) 100%);
+  transform: translateY(-4px);
+}
+
+.add-address-card mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: var(--primary);
+}
+
+.add-address-card span {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.empty-state {
+  max-width: 500px;
+  margin: 60px auto;
+  text-align: center;
+  padding: 60px 40px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: var(--shadow-md);
+}
+
+.empty-icon {
+  font-size: 100px;
+  margin-bottom: 24px;
+  opacity: 0.5;
+}
+
+.empty-state h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.empty-state p {
+  font-size: 16px;
+  color: var(--gray-600);
+  margin-bottom: 32px;
+}
+
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C61 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+}
+
+.action-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 20px 40px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.proceed-btn {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C61 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.proceed-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+}
+
+.proceed-btn:disabled {
+  background: var(--gray-300);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .addresses-grid {
+    grid-template-columns: 1fr;
+  }
+  .address-content {
+    padding: 0 20px;
+  }
+  .action-footer {
+    padding: 16px 20px;
+  }
+}

@@ -1,0 +1,236 @@
+/* Premium Payment Success */
+.success-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(255, 235, 59, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.success-card {
+  max-width: 700px;
+  width: 100%;
+  background: white;
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon-wrapper {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 24px;
+  background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleIn 0.5s ease-out 0.2s both;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.success-icon-wrapper mat-icon {
+  font-size: 72px;
+  width: 72px;
+  height: 72px;
+  color: white;
+}
+
+.success-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.success-subtitle {
+  font-size: 18px;
+  color: var(--gray-600);
+  margin-bottom: 32px;
+}
+
+.order-details {
+  background: var(--gray-50);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 32px 0;
+  text-align: left;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  font-size: 16px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: var(--gray-600);
+  font-weight: 500;
+}
+
+.detail-value {
+  color: var(--gray-900);
+  font-weight: 600;
+}
+
+.order-id {
+  font-size: 20px;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: rgba(255, 193, 7, 0.2);
+  color: #F57C00;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.items-section {
+  margin: 32px 0;
+  text-align: left;
+}
+
+.items-section h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 16px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.item-quantity {
+  font-size: 14px;
+  color: var(--gray-600);
+}
+
+.item-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.total-section {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 140, 97, 0.1) 100%);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 24px 0;
+}
+
+.total-amount {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: 'Poppins', sans-serif;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.btn-primary {
+  flex: 1;
+  padding: 16px;
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C61 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+}
+
+.btn-secondary {
+  flex: 1;
+  padding: 16px;
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  background: var(--gray-50);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .success-card {
+    padding: 32px 24px;
+  }
+  .action-buttons {
+    flex-direction: column;
+  }
+}

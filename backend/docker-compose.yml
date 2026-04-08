@@ -1,0 +1,102 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: foodhub-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-Admin@123}
+    ports:
+      - "3307:3306" # Mapped to 3307 to avoid conflict with local MySQL
+    volumes:
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    env_file: ./eureka-server/.env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  user-service:
+    build: ./user-service
+    container_name: user-service
+    ports:
+      - "8086:80"
+    env_file: ./user-service/.env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=80
+      - DB_URL=jdbc:mysql://mysql:3306/fooduser_db
+      - EUREKA_URL=http://eureka-server:8761/eureka
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  restaurant-service:
+    build: ./restaurant-service
+    container_name: restaurant-service
+    ports:
+      - "8084:80"
+    env_file: ./restaurant-service/.env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=80
+      - DB_URL=jdbc:mysql://mysql:3306/restaurant_db
+      - EUREKA_URL=http://eureka-server:8761/eureka
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  order-cart-service:
+    build: ./order-cart-service
+    container_name: order-cart-service
+    ports:
+      - "8083:80"
+    env_file: ./order-cart-service/.env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=80
+      - DB_URL=jdbc:mysql://mysql:3306/order_cart_db
+      - EUREKA_URL=http://eureka-server:8761/eureka
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  payment-service:
+    build: ./payment-service
+    container_name: payment-service
+    ports:
+      - "8082:80"
+    env_file: ./payment-service/.env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=80
+      - DB_URL=jdbc:mysql://mysql:3306/payment_db
+      - EUREKA_URL=http://eureka-server:8761/eureka
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "9001:80"
+    env_file: ./api-gateway/.env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=80
+      - EUREKA_URL=http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server

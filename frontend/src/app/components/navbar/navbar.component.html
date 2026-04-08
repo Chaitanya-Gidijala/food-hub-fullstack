@@ -1,0 +1,68 @@
+<!-- Premium Navbar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand" routerLink="/home">
+      <div class="brand-logo">
+        <mat-icon>restaurant</mat-icon>
+      </div>
+      <span class="brand-name">FoodHub</span>
+    </div>
+
+    <div class="navbar-menu" *ngIf="isLoggedIn()">
+      <a class="nav-link" routerLink="/home" routerLinkActive="active" *ngIf="user?.role !== 'ADMIN'">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </a>
+
+      <a class="nav-link cart-link" routerLink="/cart" routerLinkActive="active" *ngIf="user?.role === 'CUSTOMER'">
+        <div class="cart-icon-wrapper">
+          <mat-icon>shopping_cart</mat-icon>
+          <span class="cart-badge" *ngIf="cartCount > 0">{{cartCount}}</span>
+        </div>
+        <span>Cart</span>
+      </a>
+
+      <a class="nav-link" routerLink="/orders" routerLinkActive="active" *ngIf="user?.role === 'CUSTOMER'">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Orders</span>
+      </a>
+
+      <div class="user-menu">
+        <button class="user-btn" [matMenuTriggerFor]="menu" type="button">
+          <div class="user-avatar">
+            <mat-icon>account_circle</mat-icon>
+          </div>
+          <span class="user-name">{{user?.username}}</span>
+          <mat-icon class="dropdown-icon">expand_more</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu" class="user-dropdown">
+          <button mat-menu-item routerLink="/profile">
+            <mat-icon>person</mat-icon>
+            <span>My Profile</span>
+          </button>
+          <button mat-menu-item routerLink="/addresses" *ngIf="user?.role === 'CUSTOMER'">
+            <mat-icon>location_on</mat-icon>
+            <span>My Addresses</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logout()" class="logout-btn">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+
+    <div class="navbar-auth" *ngIf="!isLoggedIn()">
+      <a class="btn-outline" routerLink="/login">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </a>
+      <a class="btn-primary" routerLink="/register">
+        <mat-icon>person_add</mat-icon>
+        <span>Sign Up</span>
+      </a>
+    </div>
+  </div>
+</nav>

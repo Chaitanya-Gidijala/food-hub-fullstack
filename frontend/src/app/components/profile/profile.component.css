@@ -1,0 +1,238 @@
+/* Premium Profile Page */
+.profile-container {
+  min-height: 100vh;
+  background: var(--gray-50);
+  padding: 40px 20px;
+}
+
+.profile-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-header {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C61 100%);
+  border-radius: 24px 24px 0 0;
+  padding: 48px 40px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.profile-avatar mat-icon {
+  font-size: 72px;
+  width: 72px;
+  height: 72px;
+  color: var(--primary);
+}
+
+.profile-name {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-role {
+  font-size: 16px;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-body {
+  background: white;
+  border-radius: 0 0 24px 24px;
+  padding: 40px;
+  box-shadow: var(--shadow-md);
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 24px;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title mat-icon {
+  color: var(--primary);
+}
+
+.info-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--gray-50);
+  border-radius: 12px;
+  transition: all 0.3s;
+}
+
+.info-item:hover {
+  background: var(--gray-100);
+  transform: translateX(4px);
+}
+
+.info-icon {
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.info-icon mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: var(--primary);
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-label {
+  font-size: 13px;
+  color: var(--gray-600);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.info-value {
+  font-size: 16px;
+  color: var(--gray-900);
+  font-weight: 600;
+}
+
+.section-divider {
+  height: 2px;
+  background: var(--gray-200);
+  margin: 32px 0;
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.action-btn {
+  padding: 16px 24px;
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.action-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C61 100%);
+  color: white;
+  border: none;
+}
+
+.action-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 140, 97, 0.1) 100%);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--gray-600);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    padding: 32px 24px;
+  }
+  .profile-body {
+    padding: 24px;
+  }
+  .action-buttons {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,79 @@
+<!-- Premium Cart Page -->
+<div class="cart-container">
+  <div class="cart-header">
+    <button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Your Cart</h1>
+  </div>
+
+  <div class="cart-content" *ngIf="cartItems.length > 0">
+    <div class="cart-items">
+      <div class="restaurant-section">
+        <div class="restaurant-badge">
+          <mat-icon>restaurant</mat-icon>
+          <span>{{restaurantName}}</span>
+        </div>
+      </div>
+
+      <div class="cart-item" *ngFor="let item of cartItems">
+        <div class="item-info">
+          <div class="veg-badge" [class.non-veg]="item.isNonVeg">
+            <div class="dot"></div>
+          </div>
+          <div class="item-details">
+            <h3>{{item.name}}</h3>
+            <p class="item-price">₹{{item.price}}</p>
+          </div>
+        </div>
+        <div class="item-actions">
+          <div class="quantity-control">
+            <button class="qty-btn" (click)="decreaseQuantity(item)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <span class="quantity">{{item.quantity}}</span>
+            <button class="qty-btn" (click)="increaseQuantity(item)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <span class="item-total">₹{{item.price * item.quantity}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <h2>Bill Details</h2>
+      <div class="summary-row">
+        <span>Item Total</span>
+        <span>₹{{itemTotal}}</span>
+      </div>
+      <div class="summary-row">
+        <span>Delivery Fee</span>
+        <span>₹{{deliveryFee}}</span>
+      </div>
+      <div class="summary-row">
+        <span>Taxes & Charges</span>
+        <span>₹{{taxes}}</span>
+      </div>
+      <div class="summary-divider"></div>
+      <div class="summary-row total">
+        <span>To Pay</span>
+        <span>₹{{grandTotal}}</span>
+      </div>
+      <button class="checkout-btn" (click)="proceedToCheckout()">
+        <span>Proceed to Checkout</span>
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="empty-cart" *ngIf="cartItems.length === 0">
+    <div class="empty-icon">🛒</div>
+    <h2>Your cart is empty</h2>
+    <p>Add items from restaurants to get started</p>
+    <button class="browse-btn" routerLink="/home">
+      <mat-icon>restaurant</mat-icon>
+      <span>Browse Restaurants</span>
+    </button>
+  </div>
+</div>

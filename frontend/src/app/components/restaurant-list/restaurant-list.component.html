@@ -1,0 +1,25 @@
+<div class="restaurant-container">
+  <h1>
+    <mat-icon>restaurant</mat-icon>
+    Restaurants
+  </h1>
+
+  <div class="restaurant-grid">
+    <mat-card *ngFor="let restaurant of restaurants" class="restaurant-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>storefront</mat-icon>
+        <mat-card-title>{{restaurant.restaurantName}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><mat-icon>location_on</mat-icon> {{restaurant.location}}</p>
+        <p><mat-icon>phone</mat-icon> {{restaurant.phone}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="viewMenu(restaurant.restaurantName)">
+          <mat-icon>menu_book</mat-icon>
+          View Menu
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
