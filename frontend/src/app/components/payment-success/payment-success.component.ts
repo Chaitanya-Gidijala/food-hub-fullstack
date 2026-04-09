@@ -33,6 +33,8 @@ export class PaymentSuccessComponent implements OnInit {
     if (orderId) {
       this.orderService.getOrderById(+orderId).subscribe(order => {
         this.order = order;
+        // Formally confirm the order now that payment is successful
+        this.orderService.updateOrderStatus(+orderId, 'CONFIRMED').subscribe();
         this.cartService.clearCart(this.userId).subscribe();
         localStorage.removeItem('pendingOrderId');
       });

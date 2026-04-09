@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { RestaurantService } from '../../services/restaurant.service';
 import { MenuService } from '../../services/menu.service';
+import { FavoritesService } from '../../services/favorites.service';
 import { Restaurant } from '../../models/restaurant.model';
 
 @Component({
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
     private authService: AuthService, 
     private router: Router,
     private restaurantService: RestaurantService,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private favoritesService: FavoritesService
   ) {}
 
   ngOnInit(): void {
@@ -29,14 +31,24 @@ export class HomeComponent implements OnInit {
     if (user) {
       if (user.role === 'ADMIN') {
         this.router.navigate(['/admin-dashboard']);
+        return;
       } else if (user.role === 'RESTAURANT_OWNER') {
         this.router.navigate(['/restaurant-owner-dashboard']);
-      } else if (user.role === 'CUSTOMER') {
-        this.loadRestaurantsAndMenus();
+        return;
       }
-    } else {
-      this.router.navigate(['/login']);
     }
+    
+    // Customers and Guests stay on home page
+    this.loadRestaurantsAndMenus();
+  }
+
+  toggleFavorite(event: Event, restaurant: Restaurant): void {
+    event.stopPropagation();
+    this.favoritesService.toggleFavoriteRestaurant(restaurant);
+  }
+
+  isFavorite(restaurantId: number): boolean {
+    return this.favoritesService.isFavoriteRestaurant(restaurantId);
   }
 
   loadRestaurantsAndMenus(): void {

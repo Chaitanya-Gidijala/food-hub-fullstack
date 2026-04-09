@@ -9,7 +9,7 @@ import { API_ENDPOINTS } from '../config/api.config';
 export class PaymentService {
   constructor(private http: HttpClient) {}
 
-  createPaymentSession(bookingId: string, amount: number): Observable<string> {
-    return this.http.post(API_ENDPOINTS.PAYMENT.CREATE_SESSION, { bookingId, amount }, { responseType: 'text' });
+  createPaymentSession(bookingId: string, amount: number, addressId: number): Observable<string> {
+    return this.http.post(API_ENDPOINTS.PAYMENT.CREATE_SESSION, { bookingId, amount, addressId }, { responseType: 'text' });
   }
 }

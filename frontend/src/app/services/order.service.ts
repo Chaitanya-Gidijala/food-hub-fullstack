@@ -33,4 +33,8 @@ export class OrderService {
   updateOrderStatus(orderId: number, status: string): Observable<Order> {
     return this.http.patch<Order>(API_ENDPOINTS.ORDER.UPDATE_STATUS(orderId), {}, { params: { status } });
   }
+
+  rollbackOrder(orderId: number): Observable<string> {
+    return this.http.post(API_ENDPOINTS.ORDER.ROLLBACK(orderId), {}, { responseType: 'text' });
+  }
 }

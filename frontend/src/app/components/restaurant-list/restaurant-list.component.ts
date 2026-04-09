@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RestaurantService } from '../../services/restaurant.service';
+import { FavoritesService } from '../../services/favorites.service';
 import { Restaurant } from '../../models/restaurant.model';
 
 @Component({
@@ -13,7 +14,8 @@ export class RestaurantListComponent implements OnInit {
 
   constructor(
     private restaurantService: RestaurantService,
-    private router: Router
+    private router: Router,
+    private favoritesService: FavoritesService
   ) {}
 
   ngOnInit(): void {
@@ -28,5 +30,14 @@ export class RestaurantListComponent implements OnInit {
 
   viewMenu(restaurantName: string): void {
     this.router.navigate(['/menu', restaurantName]);
+  }
+
+  toggleFavorite(event: Event, restaurant: Restaurant): void {
+    event.stopPropagation();
+    this.favoritesService.toggleFavoriteRestaurant(restaurant);
+  }
+
+  isFavorite(restaurantId: number): boolean {
+    return this.favoritesService.isFavoriteRestaurant(restaurantId);
   }
 }

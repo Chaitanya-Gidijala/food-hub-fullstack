@@ -17,19 +17,25 @@ import { AddressSelectionComponent } from './components/address-selection/addres
 import { AddressListComponent } from './components/address-list/address-list.component';
 import { AddAddressComponent } from './components/add-address/add-address.component';
 import { EditAddressComponent } from './components/edit-address/edit-address.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { WalletComponent } from './components/wallet/wallet.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { FaqComponent } from './components/faq/faq.component';
 import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'home', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'home', component: HomeComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [authGuard] },
   { path: 'customer-dashboard', component: CustomerDashboardComponent, canActivate: [authGuard] },
   { path: 'restaurant-owner-dashboard', component: RestaurantOwnerDashboardComponent, canActivate: [authGuard] },
-  { path: 'restaurants', component: RestaurantListComponent, canActivate: [authGuard] },
-  { path: 'menu/:name', component: MenuItemsComponent, canActivate: [authGuard] },
-  { path: 'cart', component: CartComponent, canActivate: [authGuard] },
+  { path: 'restaurants', component: RestaurantListComponent },
+  { path: 'menu/:name', component: MenuItemsComponent },
+  { path: 'cart', component: CartComponent },
   { path: 'payment', component: PaymentComponent, canActivate: [authGuard] },
   { path: 'payment-success', component: PaymentSuccessComponent, canActivate: [authGuard] },
   { path: 'orders', component: OrdersComponent, canActivate: [authGuard] },
@@ -37,7 +43,13 @@ const routes: Routes = [
   { path: 'address-selection', component: AddressSelectionComponent, canActivate: [authGuard] },
   { path: 'addresses', component: AddressListComponent, canActivate: [authGuard] },
   { path: 'add-address', component: AddAddressComponent, canActivate: [authGuard] },
-  { path: 'edit-address/:id', component: EditAddressComponent, canActivate: [authGuard] }
+  { path: 'edit-address/:id', component: EditAddressComponent, canActivate: [authGuard] },
+  { path: 'favorites', component: FavoritesComponent },
+  { path: 'wallet', component: WalletComponent, canActivate: [authGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'faq', component: FaqComponent }
 ];
 
 @NgModule({

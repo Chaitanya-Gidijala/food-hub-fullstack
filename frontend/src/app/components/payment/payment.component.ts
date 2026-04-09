@@ -36,7 +36,25 @@ export class PaymentComponent implements OnInit {
     const user = this.authService.getUserFromStorage();
     if (user) {
       this.userId = user.id!;
-      this.addressId = Number(this.route.snapshot.queryParams['addressId']);
+      const params = this.route.snapshot.queryParams;
+      this.addressId = Number(params['addressId']);
+
+      // Check if we came back from a cancelled stripe session
+      const cancelled = params['cancelled'] === 'true';
+      const orderId = params['orderId'];
+
+      if (cancelled && orderId) {
+        this.orderService.rollbackOrder(Number(orderId)).subscribe({
+          next: () => {
+            this.snackBar.open('Payment Cancelled. Your cart has been restored.', 'OK', { 
+              duration: 5000,
+              panelClass: ['warning-snackbar']
+            });
+            this.loadCartTotal();
+          }
+        });
+      }
+
       if (this.addressId) {
         this.loadSelectedAddress();
         this.loadCartTotal();
@@ -69,7 +87,7 @@ export class PaymentComponent implements OnInit {
     this.orderService.placeOrderWithAddress(this.userId, this.addressId).subscribe({
       next: (order) => {
         localStorage.setItem('pendingOrderId', order.orderId!.toString());
-        this.paymentService.createPaymentSession(order.orderId!.toString(), this.totalAmount).subscribe({
+        this.paymentService.createPaymentSession(order.orderId!.toString(), this.totalAmount, this.addressId!).subscribe({
           next: (url) => {
             window.location.href = url;
           },

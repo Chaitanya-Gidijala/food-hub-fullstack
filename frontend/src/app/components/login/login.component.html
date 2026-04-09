@@ -7,6 +7,22 @@
       <h1>FoodHub</h1>
       <p>Delicious food, delivered fast</p>
     </div>
+
+    <div class="auth-features">
+      <div class="feature-item">
+        <div class="feature-icon"><mat-icon>bolt</mat-icon></div>
+        <span>30-minute delivery guarantee</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><mat-icon>storefront</mat-icon></div>
+        <span>500+ top-rated restaurants</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><mat-icon>verified</mat-icon></div>
+        <span>Safe & secure payments</span>
+      </div>
+    </div>
+
     <div class="auth-illustration">
       <div class="floating-food food-1">🍕</div>
       <div class="floating-food food-2">🍔</div>
@@ -14,36 +30,38 @@
       <div class="floating-food food-4">🍰</div>
     </div>
   </div>
-  
+
   <div class="auth-right">
     <div class="auth-card">
       <div class="auth-header">
-        <h2>Welcome Back</h2>
+        <h2>Welcome back 👋</h2>
         <p>Login to continue your food journey</p>
       </div>
-      
-      <form (ngSubmit)="login()" class="auth-form">
+
+      <form (ngSubmit)="login()" class="auth-form" id="login-form">
         <div class="form-group">
-          <label>Email or Phone</label>
+          <label for="login-email">Email or Phone</label>
           <div class="input-wrapper">
             <mat-icon class="input-icon">email</mat-icon>
-            <input 
-              type="text" 
-              [(ngModel)]="emailOrPhone" 
-              name="emailOrPhone" 
+            <input
+              id="login-email"
+              type="text"
+              [(ngModel)]="emailOrPhone"
+              name="emailOrPhone"
               placeholder="Enter your email or phone"
               required>
           </div>
         </div>
 
         <div class="form-group">
-          <label>Password</label>
+          <label for="login-password">Password</label>
           <div class="input-wrapper">
             <mat-icon class="input-icon">lock</mat-icon>
-            <input 
-              [type]="hidePassword ? 'password' : 'text'" 
-              [(ngModel)]="password" 
-              name="password" 
+            <input
+              id="login-password"
+              [type]="hidePassword ? 'password' : 'text'"
+              [(ngModel)]="password"
+              name="password"
               placeholder="Enter your password"
               required>
             <button type="button" class="toggle-password" (click)="hidePassword = !hidePassword">
@@ -52,14 +70,14 @@
           </div>
         </div>
 
-        <button type="submit" class="btn-primary">
+        <button type="submit" class="btn-primary" id="login-submit-btn">
           <span>Login</span>
           <mat-icon>arrow_forward</mat-icon>
         </button>
       </form>
 
       <div class="auth-footer">
-        <p>Don't have an account? <a routerLink="/register" class="link">Sign up</a></p>
+        <p>Don't have an account? <a routerLink="/register" class="link">Sign up for free</a></p>
       </div>
     </div>
   </div>

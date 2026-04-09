@@ -1,5 +1,5 @@
 <!-- Premium Address Selection -->
-<div class="address-container">
+<div class="address-container u-compact">
   <div class="address-header">
     <button class="back-btn" (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
@@ -12,7 +12,7 @@
 
   <div class="address-content">
     <div class="addresses-grid" *ngIf="addresses.length > 0">
-      <div class="address-card" *ngFor="let address of addresses" 
+      <div class="address-card card-compact" *ngFor="let address of addresses" 
            [class.selected]="selectedAddressId === address.id"
            (click)="selectAddress(address.id)">
         <div class="card-header">
@@ -42,8 +42,8 @@
         </div>
       </div>
 
-      <div class="add-address-card" (click)="addNewAddress()">
-        <mat-icon>add_circle_outline</mat-icon>
+      <div class="add-address-card card-compact" (click)="addNewAddress()">
+        <mat-icon class="small-add-icon">add_circle_outline</mat-icon>
         <span>Add New Address</span>
       </div>
     </div>
@@ -52,7 +52,7 @@
       <div class="empty-icon">📍</div>
       <h2>No addresses saved</h2>
       <p>Add a delivery address to continue</p>
-      <button class="add-btn" (click)="addNewAddress()">
+      <button class="add-btn btn-compact" (click)="addNewAddress()">
         <mat-icon>add</mat-icon>
         <span>Add Address</span>
       </button>
@@ -60,7 +60,7 @@
   </div>
 
   <div class="action-footer" *ngIf="addresses.length > 0">
-    <button class="proceed-btn" [disabled]="!selectedAddressId" (click)="proceedToPayment()">
+    <button class="proceed-btn btn-compact" [disabled]="!selectedAddressId" (click)="proceedToPayment()">
       <span>Proceed to Payment</span>
       <mat-icon>arrow_forward</mat-icon>
     </button>

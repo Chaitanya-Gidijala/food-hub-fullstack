@@ -46,6 +46,16 @@ import { AddressSelectionComponent } from './components/address-selection/addres
 import { AddressListComponent } from './components/address-list/address-list.component';
 import { AddAddressComponent } from './components/add-address/add-address.component';
 import { EditAddressComponent } from './components/edit-address/edit-address.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CustomerSidebarComponent } from './components/customer-sidebar/customer-sidebar.component';
+import { RestaurantSidebarComponent } from './components/restaurant-sidebar/restaurant-sidebar.component';
+import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { WalletComponent } from './components/wallet/wallet.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +78,17 @@ import { EditAddressComponent } from './components/edit-address/edit-address.com
     AddressSelectionComponent,
     AddressListComponent,
     AddAddressComponent,
-    EditAddressComponent
+    EditAddressComponent,
+    FooterComponent,
+    CustomerSidebarComponent,
+    RestaurantSidebarComponent,
+    AdminSidebarComponent,
+    FavoritesComponent,
+    WalletComponent,
+    SettingsComponent,
+    AboutComponent,
+    ContactComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

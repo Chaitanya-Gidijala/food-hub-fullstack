@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { RestaurantService } from '../../services/restaurant.service';
 import { MenuService } from '../../services/menu.service';
@@ -12,7 +14,9 @@ import { MenuItem } from '../../models/menu.model';
   templateUrl: './restaurant-owner-dashboard.component.html',
   styleUrls: ['./restaurant-owner-dashboard.component.css']
 })
-export class RestaurantOwnerDashboardComponent implements OnInit {
+export class RestaurantOwnerDashboardComponent implements OnInit, OnDestroy {
+  activeTab: string = 'restaurant';
+  private querySub: Subscription | undefined;
   restaurant: Restaurant | null = null;
   menuItems: MenuItem[] = [];
   orders: any[] = [];
@@ -41,11 +45,22 @@ export class RestaurantOwnerDashboardComponent implements OnInit {
     private restaurantService: RestaurantService,
     private menuService: MenuService,
     private orderService: OrderService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.loadRestaurant();
+    
+    this.querySub = this.route.queryParams.subscribe(params => {
+      this.activeTab = params['tab'] || 'restaurant';
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.querySub) {
+      this.querySub.unsubscribe();
+    }
   }
 
   loadRestaurant(): void {

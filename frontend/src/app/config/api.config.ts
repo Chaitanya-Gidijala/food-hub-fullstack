@@ -22,6 +22,9 @@ export const API_ENDPOINTS = {
 
   USERS: {
     GET_ALL: joinUrl(API_BASE, '/api/users/all'),
+    GET_BY_ID: (userId: number) => joinUrl(API_BASE, `/api/users/${userId}`),
+    UPDATE: (userId: number) => joinUrl(API_BASE, `/api/users/${userId}`),
+    DELETE: (userId: number) => joinUrl(API_BASE, `/api/users/${userId}`),
     APPROVAL: (userId: number) => joinUrl(API_BASE, `/api/users/${userId}/approve`),
     ADDRESSES_BY_USER: (userId: number) => joinUrl(API_BASE, `/api/users/${userId}/addresses`),
   },
@@ -41,6 +44,7 @@ export const API_ENDPOINTS = {
     CREATE: joinUrl(API_BASE, '/api/restaurants'),
     GET_BY_OWNER: (ownerId: number) => joinUrl(API_BASE, `/api/restaurants/owner/${ownerId}`),
     UPDATE_BY_NAME: (name: string) => joinUrl(API_BASE, `/api/restaurants/${name}`),
+    DELETE: (name: string) => joinUrl(API_BASE, `/api/restaurants/${name}`),
     VERIFY: (id: number) => joinUrl(API_BASE, `/api/restaurants/${id}/verify`),
   },
 
@@ -65,6 +69,7 @@ export const API_ENDPOINTS = {
     GET_BY_ID: (orderId: number) => joinUrl(API_BASE, `/orders/${orderId}`),
     GET_BY_RESTAURANT: (restaurantId: number) => joinUrl(API_BASE, `/orders/restaurant/${restaurantId}`),
     UPDATE_STATUS: (orderId: number) => joinUrl(API_BASE, `/orders/${orderId}/status`),
+    ROLLBACK: (orderId: number) => joinUrl(API_BASE, `/orders/rollback/${orderId}`),
   },
 
   PAYMENT: {

@@ -1,82 +1,125 @@
-<!-- Premium Menu Page -->
+<!-- Premium Swiggy-Style Menu Page -->
 <div class="menu-container">
-  <div class="restaurant-header">
+  
+  <!-- Info Card Header -->
+  <div class="restaurant-info-card">
     <button class="back-btn" (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <div class="restaurant-info">
-      <h1>{{restaurantName}}</h1>
-      <div class="restaurant-meta">
-        <div class="meta-badge">
-          <mat-icon>star</mat-icon>
-          <span>4.5</span>
+    <div class="info-card">
+      <div class="info-top">
+        <h1 class="rest-name">{{restaurantName}}</h1>
+        <div class="rest-rating">
+          <div class="rating-pill">
+            <mat-icon>star</mat-icon>
+            <span>4.5</span>
+          </div>
         </div>
-        <span class="separator">•</span>
-        <span>30-40 min</span>
-        <span class="separator">•</span>
-        <span>₹{{costForTwo}} for two</span>
+      </div>
+      <p class="rest-cuisines">North Indian, Chinese, Biryani</p>
+      
+      <div class="rest-details">
+        <div class="detail-row">
+          <div class="timeline-dot"></div>
+          <span class="detail-text">Outlet <span class="bold">CBD Belapur</span></span>
+        </div>
+        <div class="detail-row">
+          <div class="timeline-dot bottom"></div>
+          <span class="detail-text bold">35-40 mins</span>
+        </div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="cost-info">
+        <mat-icon class="icon-bike">directions_bike</mat-icon>
+        <span>₹{{costForTwo}} for two • Free delivery on orders above ₹400</span>
       </div>
     </div>
   </div>
 
-  <div class="menu-content">
-    <div class="search-filter">
-      <div class="search-box">
-        <mat-icon>search</mat-icon>
-        <input type="text" [(ngModel)]="searchTerm" (input)="filterItems()" placeholder="Search for dishes...">
-      </div>
-      <div class="filter-chips">
-        <button class="chip" [class.active]="selectedCategory === ''" (click)="filterByCategory('')">All</button>
-        <button class="chip" [class.active]="selectedCategory === cat" *ngFor="let cat of categories" (click)="filterByCategory(cat)">
-          {{cat}}
-        </button>
-      </div>
+  <!-- Search & Toggle Area -->
+  <div class="menu-filters">
+    <div class="veg-toggle-row">
+      <span>Veg Only</span>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider round"></span>
+      </label>
     </div>
+    <div class="search-box">
+      <input type="text" [(ngModel)]="searchTerm" (input)="filterItems()" placeholder="Search for dishes...">
+      <mat-icon>search</mat-icon>
+    </div>
+  </div>
 
-    <div class="menu-grid" *ngIf="filteredMenuItems.length > 0">
-      <div class="menu-card" *ngFor="let item of filteredMenuItems">
-        <div class="menu-image">
-          <div class="image-placeholder">🍽️</div>
-          <div class="veg-badge" [class.non-veg]="item.isNonVeg">
-            <div class="dot"></div>
-          </div>
-        </div>
-        <div class="menu-info">
-          <h3>{{item.dishName}}</h3>
-          <p class="description">{{item.description}}</p>
-          <div class="menu-footer">
-            <span class="price">₹{{item.price}}</span>
-            <div class="quantity-control" *ngIf="getItemQuantity(item) > 0">
-              <button class="qty-btn" (click)="decreaseQuantity(item)">
-                <mat-icon>remove</mat-icon>
-              </button>
-              <span class="quantity">{{getItemQuantity(item)}}</span>
-              <button class="qty-btn" (click)="increaseQuantity(item)">
-                <mat-icon>add</mat-icon>
-              </button>
+  <!-- Menu List Section -->
+  <div class="menu-list-wrapper">
+    <h2 class="category-heading">Recommended ({{filteredMenuItems.length}})</h2>
+
+    <div class="menu-list" *ngIf="filteredMenuItems.length > 0">
+      <div class="menu-list-item" *ngFor="let item of filteredMenuItems">
+        
+        <!-- Left Side: Dish Details -->
+        <div class="item-details">
+          <div class="dish-header">
+            <div class="veg-badge" [class.non-veg]="item.isNonVeg">
+              <div class="dot"></div>
             </div>
-            <button class="add-btn" *ngIf="getItemQuantity(item) === 0" (click)="addToCart(item)" [disabled]="!item.available">
-              <mat-icon>add</mat-icon>
-              <span>{{item.available ? 'Add' : 'Unavailable'}}</span>
+            <button class="favorite-dish-btn" (click)="toggleFavorite($event, item)" [class.active]="isFavorite(item.id!)">
+              <mat-icon>{{ isFavorite(item.id!) ? 'favorite' : 'favorite_border' }}</mat-icon>
             </button>
           </div>
+          <h3 class="item-name">{{item.dishName}}</h3>
+          <p class="item-price">₹{{item.price}}</p>
+          <div class="item-rating">
+            <mat-icon class="star-filled">star</mat-icon>
+            <span>4.{{ (item.price % 9) + 1 }} (100+)</span>
+          </div>
+          <p class="item-description">{{item.description || 'A delicious and highly recommended dish made with fresh ingredients and authentic spices.'}}</p>
         </div>
+
+        <!-- Right Side: Dish Image & Add Button -->
+        <div class="item-image-container">
+          <div class="item-image">
+            <span class="img-placeholder">🍽️</span>
+          </div>
+          
+          <!-- Overlapping Add Button / Quantity Control -->
+          <div class="action-wrapper">
+            <button class="swiggy-add-btn" *ngIf="getItemQuantity(item) === 0" (click)="addToCart(item)" [disabled]="!item.available">
+              {{item.available ? 'ADD' : 'SOLD OUT'}}
+            </button>
+            
+            <div class="swiggy-qty-btn" *ngIf="getItemQuantity(item) > 0">
+              <button class="qty-minus" (click)="decreaseQuantity(item)"><mat-icon>remove</mat-icon></button>
+              <span class="qty-val">{{getItemQuantity(item)}}</span>
+              <button class="qty-plus" (click)="increaseQuantity(item)"><mat-icon>add</mat-icon></button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
+    <!-- Empty State -->
     <div class="empty-state" *ngIf="filteredMenuItems.length === 0">
       <div class="empty-icon">🍽️</div>
       <h3>No items found</h3>
-      <p>Try different search terms or filters</p>
+      <p>Try different search terms or explore other restaurants.</p>
     </div>
   </div>
 
+  <!-- Floating Cart Bar -->
   <div class="cart-float" *ngIf="cartItemCount > 0" (click)="viewCart()">
     <div class="cart-info">
-      <span class="cart-count">{{cartItemCount}} items</span>
-      <span class="cart-total">₹{{cartTotal}}</span>
+      <span class="cart-count">{{cartItemCount}} items | ₹{{cartTotal}}</span>
+      <span class="cart-tax">Extra charges may apply</span>
     </div>
-    <span class="cart-text">View Cart</span>
-    <mat-icon>arrow_forward</mat-icon>
+    <div class="cart-action">
+      <span class="cart-text">View Cart</span>
+      <mat-icon>shopping_bag</mat-icon>
+    </div>
   </div>
+  
 </div>
