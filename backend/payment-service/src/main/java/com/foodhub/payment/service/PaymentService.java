@@ -29,11 +29,11 @@ public class PaymentService {
         Stripe.apiKey = stripeSecretKey;
     }
 
-    public String createPaymentSession(String bookingId, Double amount) throws Exception {
+    public String createPaymentSession(String bookingId, Double amount, Long addressId) throws Exception {
         SessionCreateParams params = SessionCreateParams.builder()
             .setMode(SessionCreateParams.Mode.PAYMENT)
             .setSuccessUrl("http://localhost:4200/payment-success?orderId=" + bookingId)
-            .setCancelUrl("http://localhost:4200/payment")
+            .setCancelUrl("http://localhost:4200/payment?addressId=" + addressId + "&orderId=" + bookingId + "&cancelled=true")
             .addLineItem(SessionCreateParams.LineItem.builder()
                 .setQuantity(1L)
                 .setPriceData(SessionCreateParams.LineItem.PriceData.builder()

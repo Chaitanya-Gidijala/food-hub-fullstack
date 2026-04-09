@@ -80,4 +80,15 @@ public class UserController {
     public ResponseEntity<Address> setDefaultAddress(@PathVariable Long addressId, @PathVariable Long userId) {
         return ResponseEntity.ok(addressService.setDefaultAddress(addressId, userId));
     }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+        return ResponseEntity.ok(userService.updateUser(id, user));
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok().build();
+    }
 }

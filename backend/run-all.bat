@@ -12,7 +12,7 @@ echo Starting remaining microservices...
 start "User Service" cmd /k "cd user-service && mvn spring-boot:run"
 start "Restaurant Service" cmd /k "cd restaurant-service && mvn spring-boot:run"
 start "Payment Service" cmd /k "cd payment-service && mvn spring-boot:run"
-start "Order Cart Service" cmd /k "cd order-cart-service && mvn spring-boot:run"
+start "Order Cart Service" cmd /k "cd order-cart-service && set SERVER_PORT=8085 && mvn spring-boot:run"
 
 echo All microservices are starting up in separate windows!
 pause

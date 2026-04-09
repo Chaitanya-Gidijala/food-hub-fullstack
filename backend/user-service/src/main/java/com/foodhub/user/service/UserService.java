@@ -112,4 +112,25 @@ public class UserService {
         user.setApprovalStatus(status);
         return userRepository.save(user);
     }
+
+    public User updateUser(Long id, User userDetails) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+        
+        user.setUsername(userDetails.getUsername());
+        user.setEmail(userDetails.getEmail());
+        if (userDetails.getRole() != null) {
+            user.setRole(userDetails.getRole());
+        }
+        user.setPanCardNumber(userDetails.getPanCardNumber());
+        user.setFssaiLicenseNumber(userDetails.getFssaiLicenseNumber());
+        
+        return userRepository.save(user);
+    }
+
+    public void deleteUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+        userRepository.delete(user);
+    }
 }

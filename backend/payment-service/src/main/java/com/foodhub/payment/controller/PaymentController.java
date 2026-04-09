@@ -19,7 +19,8 @@ public class PaymentController {
         try {
             String bookingId = request.get("bookingId").toString();
             Double amount = Double.parseDouble(request.get("amount").toString());
-            String url = paymentService.createPaymentSession(bookingId, amount);
+            Long addressId = Long.parseLong(request.get("addressId").toString());
+            String url = paymentService.createPaymentSession(bookingId, amount, addressId);
             return ResponseEntity.ok(url);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());

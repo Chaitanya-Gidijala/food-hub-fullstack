@@ -69,4 +69,10 @@ public class OrderCartController {
     public ResponseEntity<Order> updateOrderStatus(@PathVariable Long orderId, @RequestParam String status) {
         return ResponseEntity.ok(orderCartService.updateOrderStatus(orderId, status));
     }
+
+    @PostMapping("/orders/rollback/{orderId}")
+    public ResponseEntity<String> rollbackOrder(@PathVariable Long orderId) {
+        orderCartService.rollbackOrder(orderId);
+        return ResponseEntity.ok("Order rolled back and items restored to cart");
+    }
 }

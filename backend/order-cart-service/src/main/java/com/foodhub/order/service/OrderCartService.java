@@ -62,7 +62,7 @@ public class OrderCartService {
         Order order = new Order();
         order.setUserId(userId);
         order.setRestaurantId(cartItems.get(0).getRestaurantId());
-        order.setStatus("CONFIRMED");
+        order.setStatus("PENDING");
         order.setAddressId(addressId);
         
         double total = cartItems.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
@@ -108,5 +108,21 @@ public class OrderCartService {
         Order order = getOrderById(orderId);
         order.setStatus(status);
         return orderRepository.save(order);
+    }
+
+    @Transactional
+    public void rollbackOrder(Long orderId) {
+        Order order = getOrderById(orderId);
+        // Only rollback if it's still in PENDING status
+        if ("PENDING".equals(order.getStatus())) {
+            List<CartItem> items = cartItemRepository.findByOrderId(orderId);
+            for (CartItem item : items) {
+                item.setOrderId(null);
+                cartItemRepository.save(item);
+            }
+            order.setStatus("CANCELLED");
+            orderRepository.save(order);
+            logger.info("Order {} rolled back and marked as CANCELLED", orderId);
+        }
     }
 }

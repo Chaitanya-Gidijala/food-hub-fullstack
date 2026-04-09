@@ -17,7 +17,9 @@ Start-Sleep -Seconds 2
 Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd payment-service; mvn spring-boot:run"
 Start-Sleep -Seconds 2
 
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd order-cart-service; mvn spring-boot:run"
+# order-cart-service default dev port is 8083, but it may already be in use.
+# Use an alternate free port to avoid startup failure and missing gateway routes.
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd order-cart-service; $env:SERVER_PORT='8085'; mvn spring-boot:run"
 Start-Sleep -Seconds 2
 
 Write-Host "Starting API Gateway..." -ForegroundColor Cyan
